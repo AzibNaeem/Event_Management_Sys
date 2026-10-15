@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { registerUser } from '../store/authSlice'
 
 function Register() {
@@ -10,6 +10,7 @@ function Register() {
   const [error, setError] = useState('')
 
   const users = useSelector((state) => state.auth.users)
+  const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -37,6 +38,10 @@ function Register() {
 
     dispatch(registerUser({ name: name.trim(), email: cleanEmail, password }))
     navigate('/login', { state: { message: 'Account created. You can login now.' } })
+  }
+
+  if (user) {
+    return <Navigate to="/events" replace />
   }
 
   return (

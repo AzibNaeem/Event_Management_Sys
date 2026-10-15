@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { login } from '../store/authSlice'
 
 function Login() {
@@ -9,11 +9,13 @@ function Login() {
   const [error, setError] = useState('')
 
   const users = useSelector((state) => state.auth.users)
+  const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
 
   const message = location.state?.message
+  const from = location.state?.from || '/events'
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -33,7 +35,11 @@ function Login() {
 
     // the password is not kept in the logged in user
     dispatch(login({ name: found.name, email: found.email }))
-    navigate('/events')
+    navigate(from)
+  }
+
+  if (user) {
+    return <Navigate to="/events" replace />
   }
 
   return (

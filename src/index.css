@@ -89,3 +89,25 @@ button:hover {
   margin: 12px 0 0;
   color: #c0392b;
 }
+
+.success {
+  margin: 0 0 12px;
+  color: #2e7d32;
+}
+
+.nav-links {
+  align-items: center;
+}
+.user-name {
+  color: #ffb703;
+}
+.logout-btn {
+  margin: 0;
+  padding: 4px 10px;
+  font-size: 14px;
+  background: transparent;
+  border: 1px solid #fff;
+}
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

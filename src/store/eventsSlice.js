@@ -20,6 +20,8 @@ const eventsSlice = createSlice({
   name: 'events',
   initialState: {
     events: [],
+    filters: { keyword: '', city: '', category: '', date: '' },
+    page: 0,
     totalPages: 0,
     loaded: false,
     loading: false,
@@ -28,7 +30,10 @@ const eventsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchEvents.pending, (state) => {
+      .addCase(fetchEvents.pending, (state, action) => {
+        const { keyword = '', city = '', category = '', date = '', page = 0 } = action.meta.arg
+        state.filters = { keyword, city, category, date }
+        state.page = page
         state.loading = true
         state.error = ''
       })

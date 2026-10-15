@@ -179,3 +179,46 @@ button:hover {
 .btn:hover {
   background: #33436b;
 }
+
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+.search-form input,
+.search-form select {
+  flex: 1 1 160px;
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 15px;
+  background: #fff;
+}
+.search-form button {
+  margin-top: 0;
+}
+
+button.secondary {
+  background: #fff;
+  color: #1f2a44;
+  border: 1px solid #1f2a44;
+}
+button.secondary:hover {
+  background: #e8ebf3;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0;
+}
+.pagination button {
+  margin-top: 0;
+}

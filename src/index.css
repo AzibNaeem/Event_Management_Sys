@@ -256,3 +256,28 @@ button:disabled {
   background: #f8c9c4;
   text-transform: capitalize;
 }
+
+.register-box {
+  margin: 20px 0;
+  padding: 14px 16px;
+  background: #f5f6fa;
+  border-radius: 6px;
+}
+.register-box p {
+  margin: 0 0 8px;
+}
+.register-box button {
+  margin-top: 4px;
+}
+.register-box .btn {
+  display: inline-block;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag-green {
+  background: #c8e6c9;
+}

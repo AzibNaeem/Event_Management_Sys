@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { formatDate, formatTime } from '../ticketmaster'
 
 function EventCard({ event }) {
+  const user = useSelector((state) => state.auth.user)
+  const registrations = useSelector((state) => state.registrations)
+
   const location = [event.city, event.country].filter(Boolean).join(', ')
+  const registered = user && (registrations[user.email] || []).some((e) => e.id === event.id)
 
   return (
     <div className="event-card">
@@ -13,7 +18,10 @@ function EventCard({ event }) {
       )}
 
       <div className="event-info">
-        {event.category && <span className="tag">{event.category}</span>}
+        <div className="card-tags">
+          {event.category && <span className="tag">{event.category}</span>}
+          {registered && <span className="tag tag-green">Registered</span>}
+        </div>
         <h3>{event.name}</h3>
 
         <p>{formatDate(event.date)} at {formatTime(event.time)}</p>

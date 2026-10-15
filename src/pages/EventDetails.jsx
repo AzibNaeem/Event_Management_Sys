@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { getEvent, formatDate, formatTime } from '../ticketmaster'
+import { registerEvent, cancelRegistration } from '../store/registrationsSlice'
 
 function EventDetails() {
   const { id } = useParams()
+  const dispatch = useDispatch()
+
+  const user = useSelector((state) => state.auth.user)
+  const registrations = useSelector((state) => state.registrations)
+  const [message, setMessage] = useState('')
 
   // use the event from the list if we already have it, otherwise ask the API
   const listEvent = useSelector((state) => state.events.events.find((e) => e.id === id))
@@ -48,6 +54,26 @@ function EventDetails() {
   const location = [event.address, event.city, event.country].filter(Boolean).join(', ')
   const cancelled = event.status === 'cancelled' || event.status === 'postponed'
 
+  const myEvents = user ? registrations[user.email] || [] : []
+  const registered = myEvents.some((e) => e.id === event.id)
+
+  const handleRegister = () => {
+    // only the info needed later by My Events is saved
+    const { id, name, date, time, venue, city, country, image, category } = event
+    dispatch(registerEvent({
+      email: user.email,
+      event: { id, name, date, time, venue, city, country, image, category },
+    }))
+    setMessage('You are now registered for this event.')
+  }
+
+  const handleCancel = () => {
+    if (!window.confirm('Cancel your registration for this event?')) return
+
+    dispatch(cancelRegistration({ email: user.email, id: event.id }))
+    setMessage('Your registration was cancelled.')
+  }
+
   return (
     <div className="details">
       <Link to="/events">&larr; Back to events</Link>
@@ -74,6 +100,32 @@ function EventDetails() {
 
       <h3>About this event</h3>
       <p>{event.description || 'No description available for this event.'}</p>
+
+      <div className="register-box">
+        {message && <p className="success">{message}</p>}
+
+        {!user && (
+          <>
+            <p>You need to login to register for this event.</p>
+            <Link to="/login" state={{ from: `/events/${event.id}` }} className="btn">Login to register</Link>
+          </>
+        )}
+
+        {user && registered && (
+          <>
+            <p className="success">You are registered for this event.</p>
+            <button className="secondary" onClick={handleCancel}>Cancel registration</button>
+          </>
+        )}
+
+        {user && !registered && (
+          cancelled ? (
+            <p className="error">Registration is closed because this event is {event.status}.</p>
+          ) : (
+            <button onClick={handleRegister}>Register for this event</button>
+          )
+        )}
+      </div>
 
       {event.url && (
         <p>

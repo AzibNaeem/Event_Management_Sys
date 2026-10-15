@@ -1,18 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './authSlice'
 import eventsReducer from './eventsSlice'
+import registrationsReducer from './registrationsSlice'
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     events: eventsReducer,
+    registrations: registrationsReducer,
   },
 })
 
 store.subscribe(() => {
-  const { users, user } = store.getState().auth
-  localStorage.setItem('users', JSON.stringify(users))
-  localStorage.setItem('currentUser', JSON.stringify(user))
+  const { auth, registrations } = store.getState()
+  localStorage.setItem('users', JSON.stringify(auth.users))
+  localStorage.setItem('currentUser', JSON.stringify(auth.user))
+  localStorage.setItem('registrations', JSON.stringify(registrations))
 })
 
 export default store

@@ -49,3 +49,43 @@ body {
 .nav-links a.active {
   border-bottom-color: #ffb703;
 }
+
+.form-box {
+  max-width: 400px;
+  margin: 24px auto;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.form-box label {
+  display: block;
+  margin: 12px 0 4px;
+  font-weight: bold;
+}
+.form-box input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  margin-top: 16px;
+  padding: 10px 16px;
+  background: #1f2a44;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:hover {
+  background: #33436b;
+}
+
+.error {
+  margin: 12px 0 0;
+  color: #c0392b;
+}

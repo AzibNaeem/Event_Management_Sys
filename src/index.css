@@ -281,3 +281,10 @@ button:disabled {
 .tag-green {
   background: #c8e6c9;
 }
+
+.section-title {
+  margin-top: 32px;
+}
+.event-info .secondary {
+  margin-top: 8px;
+}

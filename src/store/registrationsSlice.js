@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 // saved like { "user@email.com": [event, event], ... } so every user has their own list
-const saved = JSON.parse(localStorage.getItem('registrations')) || {}
+const data = JSON.parse(localStorage.getItem('registrations'))
+const saved = data && !Array.isArray(data) ? data : {}
 
 const registrationsSlice = createSlice({
   name: 'registrations',

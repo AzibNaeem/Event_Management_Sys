@@ -92,7 +92,7 @@ export async function getEvent(id) {
 
   let res
   try {
-    res = await fetch(`${BASE_URL}/events/${id}.json?apikey=${API_KEY}`)
+    res = await fetch(`${BASE_URL}/events/${encodeURIComponent(id)}.json?apikey=${API_KEY}`)
   } catch {
     throw new Error('Could not reach Ticketmaster. Check your internet connection.')
   }

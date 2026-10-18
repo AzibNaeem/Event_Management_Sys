@@ -85,13 +85,15 @@ function Events() {
         <p>No events found. Try a different search.</p>
       )}
 
-      <div className="event-grid">
-        {events.map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
-      </div>
+      {!error && (
+        <div className="event-grid">
+          {events.map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))}
+        </div>
+      )}
 
-      {totalPages > 1 && (
+      {!error && totalPages > 1 && (
         <div className="pagination">
           <button disabled={loading || page === 0} onClick={() => goToPage(page - 1)}>Previous</button>
           <span>Page {page + 1} of {totalPages}</span>

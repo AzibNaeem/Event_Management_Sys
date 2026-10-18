@@ -11,7 +11,6 @@ export const fetchEvents = createAsyncThunk(
     }
   },
   {
-    // do not start a second request while one is already running
     condition: (params, { getState }) => !getState().events.loading,
   }
 )

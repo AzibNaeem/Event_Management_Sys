@@ -1,7 +1,6 @@
 const API_KEY = import.meta.env.VITE_TICKETMASTER_API_KEY
 const BASE_URL = 'https://app.ticketmaster.com/discovery/v2'
 
-// turns one Ticketmaster event into the small object the app uses
 export function formatEvent(e) {
   const venue = e._embedded?.venues?.[0]
   const image = e.images?.find((img) => img.ratio === '16_9' && img.width >= 500) || e.images?.[0]
@@ -51,7 +50,6 @@ export async function getEvents({ keyword, city, category, date, page = 0 } = {}
     throw new Error('Ticketmaster API key is missing. Add VITE_TICKETMASTER_API_KEY to your .env file.')
   }
 
-  // the API wants dates like 2026-10-20T00:00:00Z (no milliseconds)
   const start = date ? date + 'T00:00:00Z' : new Date().toISOString().slice(0, 19) + 'Z'
 
   const params = new URLSearchParams({
@@ -78,7 +76,6 @@ export async function getEvents({ keyword, city, category, date, page = 0 } = {}
 
   const data = await res.json()
 
-  // the API only lets you page through the first 1000 results (50 pages of 20)
   return {
     events: (data._embedded?.events || []).map(formatEvent),
     totalPages: Math.min(data.page?.totalPages || 0, 50),

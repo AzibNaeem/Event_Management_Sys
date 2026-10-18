@@ -23,10 +23,9 @@ function Register() {
       setError('Please fill in all the fields.')
       return
     }
-    if (!/^\S+@\S+\.\S+$/.test(cleanEmail)) {
-      setError('Please enter a valid email address.')
-      return
-    }
+   
+
+
     if (password.length < 6) {
       setError('Password must be at least 6 characters.')
       return
@@ -36,6 +35,9 @@ function Register() {
       return
     }
 
+
+
+
     dispatch(registerUser({ name: name.trim(), email: cleanEmail, password }))
     navigate('/login', { state: { message: 'Account created. You can login now.' } })
   }
@@ -44,6 +46,7 @@ function Register() {
     return <Navigate to="/events" replace />
   }
 
+  
   return (
     <div className="form-box">
       <h2>Register</h2>

@@ -33,7 +33,6 @@ function Login() {
       return
     }
 
-    // the password is not kept in the logged in user
     dispatch(login({ name: found.name, email: found.email }))
     navigate(from)
   }

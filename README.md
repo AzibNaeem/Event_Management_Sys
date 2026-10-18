@@ -1,16 +1,56 @@
-# React + Vite
+# Event Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Made by Azib Naeem (L23-2541)
 
-Currently, two official plugins are available:
+Web Programming Assignment 2. It is a React app where you can look at real events from the Ticketmaster API, register for them and see your registered events.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+There is no backend. Login and registration are only simulated and the data is saved in Local Storage.
 
-## React Compiler
+## Built with
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React (Vite)
+- Redux Toolkit
+- React Router
+- Ticketmaster Discovery API
 
-## Expanding the Oxlint configuration
+## What it does
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- Register, login and logout (you stay logged in after refresh)
+- See upcoming events, search them and filter by city, category and date
+- Open an event to see its details
+- Register for an event and cancel it later (you can't register twice)
+- My Events page that shows upcoming and completed events
+- Every user only sees their own registrations
+
+## How to run
+
+1. Install the packages
+
+   ```
+   npm install
+   ```
+
+2. Get an API key from https://developer.ticketmaster.com
+
+3. Make a `.env` file in the main folder and put your key in it
+
+   ```
+   VITE_TICKETMASTER_API_KEY=your_key_here
+   ```
+
+4. Start the app
+
+   ```
+   npm run dev
+   ```
+
+   and open http://localhost:5173
+
+If you change the `.env` file you have to stop the app and start it again.
+
+## Pages
+
+- `/login` and `/register`
+- `/events` all events with search and filters
+- `/events/:id` event details and registration
+- `/my-events` your registered events (login needed)

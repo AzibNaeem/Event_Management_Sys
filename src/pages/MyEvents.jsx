@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { cancelRegistration } from '../store/registrationsSlice'
 import { formatDate, formatTime } from '../ticketmaster'
 
-// local date as YYYY-MM-DD so it can be compared with the event date
 const today = new Date().toLocaleDateString('en-CA')
 
 function MyEvents() {
@@ -15,7 +14,6 @@ function MyEvents() {
     (a.date || '9999').localeCompare(b.date || '9999')
   )
 
-  // events without a date are treated as upcoming
   const upcoming = myEvents.filter((e) => !e.date || e.date >= today)
   const completed = myEvents.filter((e) => e.date && e.date < today)
 

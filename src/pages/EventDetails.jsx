@@ -12,7 +12,6 @@ function EventDetails() {
   const registrations = useSelector((state) => state.registrations)
   const [message, setMessage] = useState('')
 
-  // use the event from the list if we already have it, otherwise ask the API
   const listEvent = useSelector((state) => state.events.events.find((e) => e.id === id))
   const [fetched, setFetched] = useState(null)
   const [loading, setLoading] = useState(!listEvent)
@@ -58,7 +57,6 @@ function EventDetails() {
   const registered = myEvents.some((e) => e.id === event.id)
 
   const handleRegister = () => {
-    // only the info needed later by My Events is saved
     const { id, name, date, time, venue, city, country, image, category } = event
     dispatch(registerEvent({
       email: user.email,

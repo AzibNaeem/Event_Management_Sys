@@ -9,7 +9,6 @@ function Events() {
   const { events, filters, page, totalPages, loaded, loading, error } = useSelector((state) => state.events)
   const dispatch = useDispatch()
 
-  // the form starts with whatever was searched last
   const [keyword, setKeyword] = useState(filters.keyword)
   const [city, setCity] = useState(filters.city)
   const [category, setCategory] = useState(filters.category)
